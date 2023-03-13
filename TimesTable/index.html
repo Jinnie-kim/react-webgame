@@ -17,28 +17,45 @@
     <script type="text/babel">
       'use strict';
 
-      const e = React.createElement;
+      // class LikeButton extends React.Component {
+      //   constructor(props) {
+      //     super(props);
+      //     this.state = { liked: false };
+      //   }
 
-      class LikeButton extends React.Component {
-        constructor(props) {
-          super(props);
-          this.state = { liked: false };
+      //   render() {
+      //     if (this.state.liked) {
+      //       return 'You liked this.';
+      //     }
+
+      //     // return e(
+      //     //   'button',
+      //     //   { onClick: () => this.setState({ liked: true }) },
+      //     //   'Like'
+      //     // );
+      //     return (
+      //       <button onClick={() => this.setState({ liked: true })}>Like</button>
+      //     );
+      //   }
+      // }
+
+      // 함수형 컴포넌트 X, 함수 컴포넌트
+      // this 쓸 일이 없다.
+      function LikeButton() {
+        const [liked, setLiked] = React.useState(false); // 구조분해
+
+        if (liked) {
+          return 'You liked this.';
         }
-
-        render() {
-          if (this.state.liked) {
-            return 'You liked this.';
-          }
-
-          // return e(
-          //   'button',
-          //   { onClick: () => this.setState({ liked: true }) },
-          //   'Like'
-          // );
-          return (
-            <button onClick={() => this.setState({ liked: true })}>Like</button>
-          );
-        }
+        return (
+          <button
+            onClick={() => {
+              setLiked(true);
+            }}
+          >
+            Like
+          </button>
+        );
       }
     </script>
     <script type="text/babel">
