@@ -93,17 +93,21 @@
                 value: '',
               };
             });
+            this.input.focus();
           } else {
             this.setState({
               result: `${this.state.value} 땡!`,
               value: '',
             });
+            this.input.focus();
           }
         };
 
         onChange = (e) => {
           this.setState({ value: e.target.value });
         };
+
+        input;
 
         render() {
           return (
@@ -114,6 +118,9 @@
               <form onSubmit={this.onSubmit}>
                 <input
                   type="number"
+                  ref={(c) => {
+                    this.input = c;
+                  }}
                   value={this.state.value}
                   onChange={this.onChange}
                 />
