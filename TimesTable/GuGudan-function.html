@@ -26,6 +26,54 @@
     <!--<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>-->
     <script type="text/babel">
       'use strict';
+
+      // state가 바뀌면 아래 함수 자체가 다시 실행된다.
+      const GuGudan = () => {
+        const [first, setFirst] = React.useState(Math.ceil(Math.random() * 9));
+        const [second, setSecond] = React.useState(
+          Math.ceil(Math.random() * 9)
+        );
+        const [value, setValue] = React.useState('');
+        const [result, setResult] = React.useState('');
+        const inputRef = React.useRef(null);
+
+        const calculate = (e) => {
+          e.preventDefault();
+          if (parseInt(value) === first * second) {
+            setResult(`${value} 정답~✨`);
+            setFirst(Math.ceil(Math.random() * 9));
+            setSecond(Math.ceil(Math.random() * 9));
+            setValue('');
+            inputRef.current.focus();
+          } else {
+            setResult(`${value} 땡!🤷🏻‍♀️`);
+            setValue('');
+            inputRef.current.focus();
+          }
+        };
+
+        const typeValue = (e) => {
+          setValue(e.target.value);
+        };
+
+        return (
+          <React.Fragment>
+            <div>
+              {first} 곱하기 {second}는?
+            </div>
+            <form onSubmit={calculate}>
+              <input
+                type="number"
+                value={value}
+                onChange={typeValue}
+                ref={inputRef}
+              />
+              <button type="submit">입력!</button>
+            </form>
+            <div>{result}</div>
+          </React.Fragment>
+        );
+      };
     </script>
     <script type="text/babel">
       ReactDOM.createRoot(document.querySelector('#root')).render(<GuGudan />);
