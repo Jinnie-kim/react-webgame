@@ -1,7 +1,7 @@
 const React = require('react');
 const ReactDomClient = require('react-dom/client'); // React 18버전으로 변경
 
-const WordRelay = require('./wordRelay');
+const WordRelay = require('./wordRelayFunc');
 const container = document.querySelector('#root');
 const root = ReactDomClient.createRoot(container);
 
