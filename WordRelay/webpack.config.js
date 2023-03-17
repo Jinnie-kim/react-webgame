@@ -38,7 +38,7 @@ module.exports = {
     ],
   },
   // 확장 프로그램, 웹팩에서 기본적으로 합쳐주는 module, rules같은 거 말고 추가적으로 뭔가 하고 싶을 때
-  plugins: [new webpack.LoaderOptionsPlugin({ debug: true })],
+  // plugins: [new webpack.LoaderOptionsPlugin({ debug: true })], // 위에서 webpack 불러와줘야함
   output: {
     // 출력
     path: path.join(__dirname, 'dist'), // join하면 경로를 알아서 합쳐준다. __dirname: 현재 폴더
