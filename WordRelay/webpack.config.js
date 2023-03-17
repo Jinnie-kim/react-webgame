@@ -1,4 +1,5 @@
 const path = require('path'); // node에서 경로를 조작할 수 있도록 하는 거
+const RefeshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 module.exports = {
   name: 'wordrelay-setting',
@@ -33,15 +34,21 @@ module.exports = {
             ],
             '@babel/preset-react',
           ],
+          plugins: ['react-refresh/babel'], // hot reloading 기능 추가
         },
       },
     ],
   },
   // 확장 프로그램, 웹팩에서 기본적으로 합쳐주는 module, rules같은 거 말고 추가적으로 뭔가 하고 싶을 때
-  // plugins: [new webpack.LoaderOptionsPlugin({ debug: true })], // 위에서 webpack 불러와줘야함
+  plugins: [new RefeshWebpackPlugin()],
   output: {
     // 출력
     path: path.join(__dirname, 'dist'), // join하면 경로를 알아서 합쳐준다. __dirname: 현재 폴더
     filename: 'app.js',
+  },
+  devServer: {
+    devMiddleware: { publicPath: '/dist/' }, // output의 public path(가상의 경로)를 그대로 써주면된다. 나중에 웹팩이 생성해주는 경로
+    static: { directory: path.resolve(__dirname) }, // 실제로 존재하는 정적 파일들의 경로
+    hot: true,
   },
 };
