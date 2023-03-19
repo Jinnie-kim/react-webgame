@@ -43,6 +43,12 @@ class ReactionCheck extends Component {
     }
   };
 
+  onReset = () => {
+    this.setState({
+      result: [],
+    });
+  };
+
   render() {
     return (
       <>
@@ -50,6 +56,7 @@ class ReactionCheck extends Component {
           {this.state.message}
         </div>
         {this.state.result.length === 0 ? null : <div>평균 시간: {this.state.result.reduce((a, b) => a + b) / this.state.result.length}ms</div>}
+        <button onClick={this.onReset}>reset</button>
       </>
     );
   }
