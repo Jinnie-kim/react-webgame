@@ -1,7 +1,7 @@
 const React = require('react');
-const { Component } = require('react');
+const { PureComponent } = require('react');
 
-class Try extends Component {
+class Try extends PureComponent {
   render() {
     return (
       <li>
