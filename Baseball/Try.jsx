@@ -4,12 +4,9 @@ const { Component } = require('react');
 class Try extends Component {
   render() {
     return (
-      <li key={this.props.index}>
-        <b>{this.props.value.fruit}</b> - {this.props.index}
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+      <li>
+        <div>{this.props.tries.try}</div>
+        <div>{this.props.tries.result}</div>
       </li>
     );
   }
