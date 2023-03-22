@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import useInterval from './useInterval';
 
 const rspCoords = {
   바위: '0',
@@ -22,23 +23,7 @@ const RockScissorPaper = () => {
   const [result, setResult] = useState('');
   const [imgCoord, setImgCoord] = useState(rspCoords.바위);
   const [score, setScore] = useState(0);
-  const interval = useRef();
-
-  useEffect(() => {
-    console.log('실행');
-    // componentDidMount, componentDidUpdate 역할(1대1 대응은 아님)
-    interval.current = setInterval(changeHand, 100);
-    return () => {
-      console.log('종료');
-      // componentWillUnmount 역할
-      clearInterval(interval.current);
-    };
-  }, [imgCoord]);
-
-  // 컴포넌트가 제거되기 직전, 비동기 요청 정리를 많이 한다.
-  // componentWillUnmount() {
-  //   clearInterval(this.interval);
-  // }
+  const [isRunning, setIsRunning] = useState(true);
 
   const changeHand = () => {
     if (imgCoord === rspCoords.바위) {
@@ -50,9 +35,10 @@ const RockScissorPaper = () => {
     }
   };
 
-  const onClickBtn = (choice) => () => {
-    clearInterval(interval.current);
+  useInterval(changeHand, isRunning ? 100 : null);
 
+  const onClickBtn = (choice) => () => {
+    setIsRunning(false);
     const myScore = scores[choice];
     const cpuScore = scores[computerChoice(imgCoord)];
     const diff = myScore - cpuScore;
@@ -66,7 +52,7 @@ const RockScissorPaper = () => {
       setScore((prevScore) => prevScore - 1);
     }
     setTimeout(() => {
-      interval.current = setInterval(changeHand, 100);
+      setIsRunning(true);
     }, 1000);
   };
 
