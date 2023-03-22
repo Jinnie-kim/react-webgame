@@ -54,7 +54,7 @@ class RockScissorPaper extends Component {
     }
   };
 
-  onClickBtn = (choice) => {
+  onClickBtn = (choice) => () => {
     clearInterval(this.interval);
     const { imgCoord } = this.state;
     const myScore = scores[choice];
@@ -62,7 +62,7 @@ class RockScissorPaper extends Component {
     const diff = myScore - cpuScore;
     if (diff === 0) {
       this.setState({
-        reuslt: '비겼습니다.',
+        result: '비겼습니다.',
       });
     } else if ([-1, 2].includes(diff)) {
       this.setState((prevState) => {
@@ -81,7 +81,7 @@ class RockScissorPaper extends Component {
     }
     setTimeout(() => {
       this.interval = setInterval(this.changeHand, 100);
-    }, 2000);
+    }, 1000);
   };
 
   render() {
@@ -90,13 +90,13 @@ class RockScissorPaper extends Component {
       <>
         <div id="computer" style={{ background: `url(https://en.pimg.jp/023/182/267/1/23182267.jpg) ${imgCoord} 0` }}></div>
         <div>
-          <button id="rock" className="btn" onClick={() => this.onClickBtn('바위')}>
+          <button id="rock" className="btn" onClick={this.onClickBtn('바위')}>
             바위
           </button>
-          <button id="scissor" className="btn" onClick={() => this.onClickBtn('가위')}>
+          <button id="scissor" className="btn" onClick={this.onClickBtn('가위')}>
             가위
           </button>
-          <button id="paper" className="btn" onClick={() => this.onClickBtn('보')}>
+          <button id="paper" className="btn" onClick={this.onClickBtn('보')}>
             보
           </button>
         </div>
