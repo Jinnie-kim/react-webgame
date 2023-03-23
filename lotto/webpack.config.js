@@ -29,7 +29,7 @@ module.exports = {
   plugins: [new RefreshWebpackPlugin()],
 
   output: {
-    path: path.join(__dirname, '/dist/'),
+    path: path.join(__dirname, 'dist'),
     filename: 'app.js',
   },
 
