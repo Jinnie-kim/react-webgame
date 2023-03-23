@@ -26,7 +26,8 @@ class Lotto extends Component {
 
   timeouts = [];
 
-  componentDidMount() {
+  runTimeouts = () => {
+    console.log('runTimeouts');
     const { winNumbers } = this.state;
     for (let i = 0; i < winNumbers.length - 1; i++) {
       this.timeouts[i] = setTimeout(() => {
@@ -43,6 +44,19 @@ class Lotto extends Component {
         redo: true,
       });
     }, 7000);
+  };
+
+  componentDidMount() {
+    console.log('didMount');
+    this.runTimeouts();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    // 원하는 조건을 잘 처리해줘야한다.
+    console.log('didUpdate');
+    if (this.state.winBalls.length === 0) {
+      this.runTimeouts();
+    }
   }
 
   componentWillUnmount() {
@@ -65,6 +79,7 @@ class Lotto extends Component {
 
   render() {
     const { winBalls, bonus, redo } = this.state;
+
     return (
       <>
         <div>당첨 숫자</div>
