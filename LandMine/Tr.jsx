@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { TableContext } from './LandMine';
 import Td from './Td';
 
-const Tr = () => {
+const Tr = ({ rowIndex }) => {
+  const { tableData } = useContext(TableContext);
   return (
     <tr>
-      <Td />
+      {tableData[0] &&
+        Array(tableData[0].length)
+          .fill()
+          .map((_, i) => <Td rowIndex={rowIndex} cellIndex={i} />)}
     </tr>
   );
 };
