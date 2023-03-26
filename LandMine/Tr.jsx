@@ -1,7 +1,12 @@
 import React from 'react';
+import Td from './Td';
 
 const Tr = () => {
-  return <tr>hello world</tr>;
+  return (
+    <tr>
+      <Td />
+    </tr>
+  );
 };
 
 export default Tr;
